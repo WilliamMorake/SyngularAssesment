@@ -1,0 +1,14 @@
+<!-- cart.component.html -->
+<div class="cart-container">
+    <h2>Your Cart</h2>
+    <ul class="cart-items">
+      <li *ngFor="let item of cartItems">
+        {{ item.name }} - {{ item.quantity }} x R{{ item.price }} = R{{ item.price * item.quantity }}
+      </li>
+    </ul>
+    <div *ngIf="cartItems.length > 0" class="cart-total">
+      Total: R{{ getTotalPrice() }}
+    </div>
+    <button *ngIf="cartItems.length > 0" (click)="clearItemCart()">Clear Cart</button>
+  </div>
+  

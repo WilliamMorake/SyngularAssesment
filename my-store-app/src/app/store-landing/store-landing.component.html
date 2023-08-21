@@ -1,0 +1,28 @@
+<div class="profile-container">
+    <div class="profile">
+      <img class="profile-picture" [src]="clients.city" alt="Profile Picture">
+      <h3>{{ clients.first_name }} {{ clients.last_name }}</h3>
+    </div>
+    <!-- cart.component.html -->
+    <app-cart></app-cart>
+  
+</div>
+
+  <div class="products-container">
+    <h2>Products</h2>
+    <ul class="product-list">
+      <li *ngFor="let product of products" class="product">
+        <img class="product-image" [src]="product" alt="{{ product.title }}">
+        <h4>{{ product.title }}</h4>
+        <p>{{ product.description }}</p>
+        <p>Price: R{{ product.price.toFixed(2) }}</p>
+        
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" max="100" value="{{ quantity }}" name="{{ quantity }}">
+        
+           
+        <button (click)="addToCart(product)">Add to Cart</button>
+      </li>
+    </ul>
+  </div>
+  

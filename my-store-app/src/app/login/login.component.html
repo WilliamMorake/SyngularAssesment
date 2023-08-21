@@ -1,0 +1,25 @@
+
+<div class="container">
+    <div class="login-container">
+        <h2>Login to start shopping</h2>
+        <form (submit)="onLogin()">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" [(ngModel)]="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" [(ngModel)]="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+        </form>
+
+    </div>
+    <div class="Register-container">
+        <app-clien-details></app-clien-details>
+    </div>    
+</div>
+
+
+

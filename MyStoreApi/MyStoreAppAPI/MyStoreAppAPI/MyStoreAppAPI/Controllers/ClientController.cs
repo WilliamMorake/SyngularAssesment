@@ -11,41 +11,79 @@ namespace MyStoreAppAPI.Controllers
     public class ClientController : Controller
     {
         private readonly MyStoreAPIDBContext _context;
+
         public ClientController(MyStoreAPIDBContext myStoreAPIDBContext)
         {
             _context = myStoreAPIDBContext;
         }
 
         [HttpPost(Name = "RegisterClient")]
-        
         async public Task<IActionResult> RegisterClient(Clients client)
         {
-            _context.Clients.Add(client);
-            await _context.SaveChangesAsync();
-            return Ok();
+            try
+            {
+                _context.Clients.Add(client);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while registering the client.");
+            }
         }
 
         [HttpGet(Name = "GetClientProfile")]
         async public Task<IActionResult> GetClient(int clientId)
         {
-            var client = await _context.Clients.FindAsync(clientId);
-            return Ok(client);
+            try
+            {
+                var client = await _context.Clients.FindAsync(clientId);
+                if (client != null)
+                {
+                    return Ok(client);
+                }
+                else
+                {
+                    return NotFound("Client not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while fetching the client profile.");
+            }
         }
 
         [HttpGet(Name = "GetClientByName")]
         public IActionResult GetClientByname(string clientName)
         {
-            Clients? clients = null;
-            foreach(var cnt  in _context.Clients)
+            try
             {
-                if(cnt.first_name == clientName)
+                Clients? clients = null;
+                foreach (var cnt in _context.Clients)
                 {
-                    clients = cnt;
+                    if (cnt.first_name == clientName)
+                    {
+                        clients = cnt;
+                        break; // Found a match, exit the loop
+                    }
+                }
+
+                if (clients != null)
+                {
+                    return Ok(clients);
+                }
+                else
+                {
+                    return NotFound("Client not found.");
                 }
             }
-
-            //var client = await _context.Clients.FindAsync($"{clientName}");
-            return Ok(clients);
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while fetching the client by name.");
+            }
         }
 
 

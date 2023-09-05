@@ -12,11 +12,10 @@
             <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" [(ngModel)]="password">
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
-        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+        <p *ngIf="errorMessage" class="alert alert-warning">{{ errorMessage }}</p>
         </form>
-
     </div>
-    <div class="Register-container">
+    <div class="login-container">
         <app-clien-details></app-clien-details>
     </div>    
 </div>

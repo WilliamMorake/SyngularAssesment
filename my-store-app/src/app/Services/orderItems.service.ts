@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Products } from '../models/product.model';
 import { environment } from 'src/environments/environment.development';
 import { CartItem } from '../models/cart-item.model';
+import { orderItems } from '../models/orderItems.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import { CartItem } from '../models/cart-item.model';
 export class OrderItemsService {
 
   baseApiUrl: string = environment.baseApiUrl;
-
+  logedInClient: any;
+  
   constructor(private http: HttpClient) { }
 
-  addToCart(clientId:number, productId: number, quantity:number){
-    const data = {};
+  addToCart(orderitem:orderItems){
+    const requestBody = JSON.stringify(orderitem);
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,7 +24,7 @@ export class OrderItemsService {
       })
     };
 
-    this.http.post<any>(this.baseApiUrl+'/api/Order_items/AddItemToCart?clientId='+clientId+'&productId='+productId+'&quantity='+quantity, data, httpOptions)
+    this.http.post<any>(this.baseApiUrl+'/api/Order_items/AddItemToCart', requestBody, httpOptions)
       .subscribe(
         response => {
           console.log('Response:', response);
@@ -39,7 +41,7 @@ export class OrderItemsService {
 
   clearCart(clientId:number){
    const data = {};
-
+   console.log("Were ckearing something....")
    const httpOptions = {
      headers: new HttpHeaders({
        'Content-Type': 'application/json'
@@ -55,6 +57,26 @@ export class OrderItemsService {
          console.error('Error:', error);
        }
      );
+  }
+
+  RemoveItemFromCart(id:number){
+    const data = {orderId:id};
+    console.log("Were removing something...");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) 
+    };
+ 
+    return this.http.post<any>(this.baseApiUrl+'/api/Order_items/RemoveItemFromCart?orderItemId='+id, data, httpOptions)
+      .subscribe(
+        response => {
+          console.log('Response:', response);
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
   }
 
   getCartItems(){

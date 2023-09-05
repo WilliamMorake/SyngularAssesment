@@ -1,8 +1,12 @@
 export interface orderItems {
-    order_item_id: number,
-    order_id: number,
-    product_id: number,
+    /*order_item_id: number,
+    orderid: number,
+    productid: number,
+    quantity: number,*/
+
+    clientId: number,
     quantity: number,
+    productId: number
 }
 
   

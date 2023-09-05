@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { ClientService } from '../Services/client.service';
 import { Clients } from '../models/clients.model';
+import { LoginComponent } from '../login/login.component';
+import { Router } from '@angular/router';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { SuccessComponent } from '../success/success.component';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-clien-details',
@@ -11,6 +17,8 @@ import { Clients } from '../models/clients.model';
 
 
 export class ClienDetailsComponent {
+  firstNameInputError: string = '';
+
   firstName: string = '';
   lastName: string = '';
   addressType: string = '';
@@ -18,24 +26,43 @@ export class ClienDetailsComponent {
   suburb: string = '';
   city: string = '';
   postalCode: string = '';
+  errorMessage: string = '';
 
-  constructor(private clientService:ClientService) {
+  registeredClient: any;
+  modalRef: MdbModalRef<SuccessComponent> | null = null;
+
+  constructor(private clientService:ClientService, private login:LoginComponent, private router:Router, private modalService: MdbModalService) {
   
   }
 
-  submitClientDetails() {
-     let clientDetails = {
-      first_name: this.firstName,
-      last_name: this.lastName,
-      address_type: this.addressType,
-      street_address: this.streetAddress,
-      suburb: this.suburb,
-      city: this.city,
-      postal_code: this.postalCode
-    };
+  submitClientDetails(form: NgForm) {
 
-    this.clientService.createClient(<Clients>clientDetails);
-    console.log('Client Details:', clientDetails);
-    // You can perform further actions, such as sending the details to a server or storing in a service.
+    if (form.valid) {
+      // Form is valid, you can proceed with submitting the data
+      let clientDetails = {
+        first_name: this.firstName,
+        last_name: this.lastName,
+        address_type: this.addressType,
+        street_address: this.streetAddress,
+        suburb: this.suburb,
+        city: this.city,
+        postal_code: this.postalCode
+      };
+  
+      this.clientService.setFirstName(this.firstName);
+      this.clientService.createClient(<Clients> clientDetails);
+      
+      console.log('Client Details:', clientDetails);
+      this.openModal();
+    } else {
+      // Form is invalid, display error messages or handle as needed
+      this.errorMessage = 'Form is invalid, please fill in all the fields';
+    }
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(SuccessComponent, {
+      modalClass: 'modal-dialog-centered'
+    });
   }
 }

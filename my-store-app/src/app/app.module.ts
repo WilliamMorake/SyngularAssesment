@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { StoreLandingComponent } from './store-landing/store-landing.component';
 import { CartComponent } from './cart/cart.component';
 import { ClienDetailsComponent } from './clien-details/clien-details.component';
+import { SuccessComponent } from './success/success.component';
+import { MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ItemAddedModalComponent } from './item-added-modal/item-added-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { ClienDetailsComponent } from './clien-details/clien-details.component';
     LoginComponent,
     StoreLandingComponent,
     CartComponent,
-    ClienDetailsComponent
+    ClienDetailsComponent,
+    SuccessComponent,
+    ItemAddedModalComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,7 @@ import { ClienDetailsComponent } from './clien-details/clien-details.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [MdbModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

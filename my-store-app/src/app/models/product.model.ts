@@ -5,5 +5,4 @@ export interface Products{
     price: number,
     quantity: number,
     image_url: string
-  
 } 

@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login on the root path
   { path: 'login', component: LoginComponent },
   { path: 'store-landing', component: StoreLandingComponent },
-  { path: 'clien-details', component:ClienDetailsComponent}
+  { path: 'clien-details', component: ClienDetailsComponent}
 ];
 
 @NgModule({

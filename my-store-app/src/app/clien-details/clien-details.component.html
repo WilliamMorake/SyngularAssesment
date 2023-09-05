@@ -1,8 +1,8 @@
 <div class="client-details">
     <h2>Register here</h2>
-    <form (ngSubmit)="submitClientDetails()">
+    <form (ngSubmit)="submitClientDetails(myForm)" #myForm="ngForm">
       <label for="firstName">First Name</label>
-      <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" required>
   
       <label for="lastName">Last Name</label>
       <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required>
@@ -26,6 +26,8 @@
       <input type="text" id="postalCode" [(ngModel)]="postalCode" name="postalCode" required>
   
       <button type="submit">Submit</button>
+      
     </form>
+    <p *ngIf="errorMessage" class="alert alert-warning">{{ errorMessage }}</p>
   </div>
   

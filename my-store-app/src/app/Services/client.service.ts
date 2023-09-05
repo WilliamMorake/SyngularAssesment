@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class ClientService {
   userId: number = 0;
   baseApiUrl: string = environment.baseApiUrl;
+  firstName: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +24,14 @@ export class ClientService {
     //return this.user;
   }  
 
+  setFirstName(name:string){
+    this.firstName = name;
+  }
+
+  getName(){
+    return this.firstName;
+  }
+  
   setClienId(clientId:number){
     this.userId = clientId;
   }
@@ -33,11 +42,6 @@ export class ClientService {
 
   createClient(client:Clients){
     const data = JSON.stringify(client);
-    //console.log('The founded: ', data);
-
-    
-
-    //***** */
 
     const httpOptions = {
       headers: new HttpHeaders({

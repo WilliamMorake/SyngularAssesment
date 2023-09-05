@@ -1,26 +1,58 @@
-/* cart.component.css */
-.cart-container {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px;
-    background-color: #f7f7f7;
-  }
-  
-  .cart-items {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .cart-items li {
-    margin-bottom: 10px;
-  }
-  
-  .cart-total {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  button {
-    margin-top: 10px;
-  }
-  
+/* shopping-cart.component.css */
+
+/* Style for the shopping cart container */
+div {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style for the "Remove" buttons */
+button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: #c0392b;
+}
+
+/* Style for the total value paragraph */
+p {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+
+/* Style for the close button */
+.close {
+  /*position: absolute;
+  top: 10px;*/
+  right: 10px;
+  position:inherit;
+  cursor: pointer;
+}

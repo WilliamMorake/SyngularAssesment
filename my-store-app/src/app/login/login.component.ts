@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; // Import the Router service
 import { ClientService } from 'src/app/Services/client.service';
-import { Clients } from '../models/clients.model';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -23,21 +21,18 @@ export class LoginComponent {
     this.loggedinClient = this.clientService.getClienProfileByName(this.username).subscribe(
       response => {
         this.loggedinClient = response;
-        console.log('Received user:', this.loggedinClient.first_name);
         if (this.username === this.loggedinClient.first_name) {
           // Successful login
-          this.errorMessage = '';
           this.router.navigate(['/store-landing'], {queryParams: {data:JSON.stringify(this.loggedinClient)}});
           // Redirect to another page or perform other actions
-        } 
+        }
       },
       error => {
+        this.errorMessage = "User not found! Please register.";
+
         console.error('Error:', error);
       }      
     );
   }
 
-  onRegister(){
-    
-  }
 }
